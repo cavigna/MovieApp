@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+
+    
+    <color name="smokyBlack">#0D0606</color>
+    <color name="blacky">#050404</color>
+    <color name="international_red">#C0030A</color>
+    <color name="oxford_lue">#1A2031</color>
+    <color name="blue_space_cadete">#1C1C3C</color>
+    <color name="light_grey">#DEDADF</color>
+    <color name="lavander_grey">#BCB9C1</color>
+
+    <color name="dark_blue">#0b1122</color>
+    <color name="brown_brick">#402836</color>
+    <color name="electric_blue">#100DF3</color>
+    <color name="blue">#070AAC</color>
+    <color name="light_blue">#0D56F3</color>
+    <color name="brick_red">#B63A18</color>
+
+    <color name="light_purple">#987DC8</color>
+
+
+    <color name="primaryColor">#0b1122</color>
+    <color name="primaryLightColor">#32374a</color>
+    <color name="primaryDarkColor">#000000</color>
+    <color name="secondaryColor">#c00309</color>
+    <color name="secondaryLightColor">#fb4d35</color>
+    <color name="secondaryDarkColor">#880000</color>
+    <color name="primaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#ffffff</color>
+</resources>
