@@ -15,6 +15,7 @@ import com.cavigna.movieapp.ui.states.UiDetailsState
 import com.cavigna.movieapp.utils.fillPathTMDB
 import com.cavigna.movieapp.utils.launchAndRepeatWithViewLifecycle
 import com.cavigna.movieapp.viewmodel.MainViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -52,7 +53,16 @@ class DetailsFragment : Fragment() {
                             }
 
                             checkBoxBookMark.setOnCheckedChangeListener { _, _ ->
+
+                                when(movie.favorite){
+                                    true -> Snackbar.make(container!!, "Agregado a Favoritos", Snackbar.LENGTH_SHORT).show()
+                                    false -> Snackbar.make(container!!, "Eliminado de Favoritos", Snackbar.LENGTH_SHORT).show()
+                                }
                                 viewModel.updateMovieDetail(movie)
+                                //val snackbar = Snackbar.make(container!!, "Agregado a Favoritos", Snackbar.LENGTH_SHORT)
+
+                                //snackbar.setAnchorView(b)
+
 
                             }
 

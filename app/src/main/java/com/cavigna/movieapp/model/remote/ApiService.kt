@@ -5,6 +5,7 @@ import com.cavigna.movieapp.model.models.model.movie.MovieResponse
 import com.cavigna.movieapp.model.models.model.movie.MovieDetail
 import com.cavigna.movieapp.model.models.model.credits.CreditResponse
 import com.cavigna.movieapp.model.models.model.images.ImagesResponse
+import com.cavigna.movieapp.model.models.model.rating.GuestSession
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -75,6 +76,14 @@ interface ApiService {
         @Query(value= "page") page:Int = 1,
         @Query(value = "include_image_language") includeLanguages: String ="en"
     ): ImagesResponse
+
+    //https://api.themoviedb.org/3/authentication/guest_session/new?api_key=
+    @GET("authentication/guest_session/new")
+    suspend fun fetchGuestSession(
+        @Query(value= "api_key") apiKey:String = APIKEY,
+    ): GuestSession
+
+
 
 //    @POST("movie/{movie_id}/rating")
 //    suspend fun ()
