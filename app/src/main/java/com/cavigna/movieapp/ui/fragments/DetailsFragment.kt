@@ -53,16 +53,17 @@ class DetailsFragment : Fragment() {
                             }
 
                             checkBoxBookMark.setOnCheckedChangeListener { _, _ ->
-
-                                when(movie.favorite){
-                                    true -> Snackbar.make(container!!, "Agregado a Favoritos", Snackbar.LENGTH_SHORT).show()
-                                    false -> Snackbar.make(container!!, "Eliminado de Favoritos", Snackbar.LENGTH_SHORT).show()
-                                }
                                 viewModel.updateMovieDetail(movie)
-                                //val snackbar = Snackbar.make(container!!, "Agregado a Favoritos", Snackbar.LENGTH_SHORT)
+                                when(movie.favorite){
+                                    true -> Toast.makeText(requireContext(), "Eliminado de Favoritos", Toast.LENGTH_SHORT).show()
 
-                                //snackbar.setAnchorView(b)
+                                    false -> Toast.makeText(requireContext(), "Agregado a Favoritos", Toast.LENGTH_SHORT).show()
 
+                                }
+                                /*
+                                 true -> Snackbar.make(container!!, "Eliminado de Favoritos", Snackbar.LENGTH_SHORT).show()
+                                    false -> Snackbar.make(container!!, "Agregado a Favoritos", Snackbar.LENGTH_SHORT).show()
+                                 */
 
                             }
 
@@ -71,8 +72,6 @@ class DetailsFragment : Fragment() {
                                     .show()
                             }
                         }
-
-                        //Log.v("algo", "https://image.tmdb.org/t/w500/${movie.posterPath}")
                     }
 
                     is UiDetailsState.Error -> {
@@ -86,10 +85,6 @@ class DetailsFragment : Fragment() {
             }
         }
 
-        this.launchAndRepeatWithViewLifecycle {
-
-            //viewModel.imagesDetails.collect {Log.v("algo", it.toString())      }
-        }
 
         return binding.root
     }
