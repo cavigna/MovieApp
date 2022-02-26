@@ -57,7 +57,7 @@ inline fun <ResultType, RequestType> networkBoundResource(
     val data = query().firstOrNull()
 
     if (data != null) {
-        Log.v("pruebas", "IN DB")
+        Log.v("EMITIDO DE", " DB")
         // data is not null -> update loading status
         emit(Resource.Loading(data))
     }else{
@@ -70,7 +70,7 @@ inline fun <ResultType, RequestType> networkBoundResource(
 
         }
 
-        Log.v("pruebas", "BUSCADO EN LA API")
+        Log.v("EMITIDO DE", "API")
     }
 
     // load updated data from database (must not return null anymore)
@@ -80,11 +80,11 @@ inline fun <ResultType, RequestType> networkBoundResource(
     emit(Resource.Success(updatedData))
 
 }.onStart {
-    Log.v("pruebas", "Loading")
+    Log.v("networkBoundResource", "Loading")
     emit(Resource.Loading(null))
 
 }.catch { exception ->
-    Log.v("pruebas", "erro")
+    Log.v("networkBoundResource", "erro")
     emit(Resource.Error(exception, null))
 
 
