@@ -48,9 +48,6 @@ class MainViewModel @Inject constructor(private val repo: Repositorio) : ViewMod
 
     val moviesPager = repo.listadoMoviesPager.cachedIn(viewModelScope)
 
-    //val imagesDetails = MutableStateFlow(ImagesResponse())
-    val imagesDetails: MutableLiveData<ImagesResponse> = MutableLiveData(ImagesResponse())
-
 
     fun selectFavoriteMovies() {
         viewModelScope.launch(IO) {
@@ -120,13 +117,8 @@ class MainViewModel @Inject constructor(private val repo: Repositorio) : ViewMod
                         is Resource.Error -> _uiDetailState.value =
                             UiDetailsState.Error(resource.error)
                     }
-
                 }
-
-
-
             }
-
         }
     }
 

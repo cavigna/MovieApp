@@ -35,10 +35,6 @@ interface MovieDao {
     @Query("SELECT * FROM movie_details_table WHERE favorite =1")
     suspend fun selectFavorteMovieDetail(): List<MovieDetail>
 
-    /* PRUEBAS */
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertPopularMovieOneOnly(movie: Movie)
 
     @Query("SELECT * FROM movie_details_table WHERE id =:id")
      fun selectMovieDetailFlow(id:Int): Flow<MovieDetail>

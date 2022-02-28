@@ -21,6 +21,13 @@ class Repositorio @Inject constructor(
     private val dao: MovieDao,
 ) {
 
+    @OptIn(ExperimentalPagingApi::class)
+    val listadoMoviesPager = Pager(
+        config = PagingConfig(1),
+    ) {
+        MoviePagingSource(api, dao)
+    }.flow
+
 
     suspend fun selectFavoriteMovies() = flowOf(dao.selectFavorteMovieDetail())
 
@@ -40,8 +47,6 @@ class Repositorio @Inject constructor(
     suspend fun updateMovieDetailFavorite(movie: MovieDetail) =
         dao.updateMovieDetailsFavorite(movie)
 
-   // suspend fun fetchImagesDetail(id: Int) = api.fetchImages(id)
-    suspend fun fetchImagesDetail(id: Int) = api.fetchImages(id)
 
     suspend fun fetchOrSelectImages(id:Int) = flow {
         val imagesDB = dao.selectImages(id)
@@ -66,12 +71,7 @@ class Repositorio @Inject constructor(
         coroutineDispatcher = IO
     )
 
-    @OptIn(ExperimentalPagingApi::class)
-    val listadoMoviesPager = Pager(
-        config = PagingConfig(1),
-    ) {
-        MoviePagingSource(api, dao)
-    }.flow
+
 
     suspend fun fetchGuestSession() = api.fetchGuestSession()
 
@@ -83,17 +83,3 @@ class Repositorio @Inject constructor(
 
 
 }
-
-/*
-@OptIn(ExperimentalPagingApi::class)
-    val listadoMoviesPager = Pager(
-        config = PagingConfig(1),
-        //remoteMediator = MovieRemoteMediator2(api, db),
-        // initialKey = 1,
-        //pagingSourceFactory = MoviePagingSource(dao, api)
-    ) {
-        //MovieRemoteMediator2(api, db)
-        MoviePagingSource(api, dao)
-
-    }.flow
- */

@@ -17,8 +17,6 @@ import com.google.gson.GsonBuilder
 import com.google.gson.Gson
 
 
-
-
 @Module
 @InstallIn(SingletonComponent::class)
 object DataModule {

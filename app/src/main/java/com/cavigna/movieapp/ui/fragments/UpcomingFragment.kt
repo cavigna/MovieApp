@@ -39,11 +39,15 @@ class UpcomingFragment : Fragment(), MoPageAdapter.ExtraerId {
 
         val uiState = viewModel.uiUpComingState
         this.launchAndRepeatWithViewLifecycle {
-            uiState.collect {state->
-            when(state){
-                is UiUpComingState.Success -> adapter.submitList(state.movieResponse.popularMovies)
-                is UiUpComingState.Error -> Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
-            }
+            uiState.collect { state ->
+                when (state) {
+                    is UiUpComingState.Success -> adapter.submitList(state.movieResponse.popularMovies)
+                    is UiUpComingState.Error -> Toast.makeText(
+                        requireContext(),
+                        state.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
 
             }
         }

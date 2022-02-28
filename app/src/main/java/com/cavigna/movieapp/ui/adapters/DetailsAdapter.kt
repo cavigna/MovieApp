@@ -25,7 +25,6 @@ class DetailsListAdapter(
             tvTituloRow.text = movie.title
             tvVoteAvergae.text = movie.voteAverage.toString()
             imageView.load("https://image.tmdb.org/t/p/original${movie.posterPath}")
-            //ratingBar.numStars = movie.voteAverage.toFloat().toInt()
             ratingBar.rating = movie.voteAverage.toFloat()
 
             card.setOnClickListener {

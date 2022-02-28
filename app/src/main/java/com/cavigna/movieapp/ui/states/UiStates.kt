@@ -13,12 +13,10 @@ sealed class UiHomeState {
     data class Local(val movies: List<Movie>) : UiHomeState()
     object Loading : UiHomeState()
     data class Error(val message: String, val moviesPopuular: List<Movie>)
-    data class Prueba(val pagingData: PagingData<Movie>) : UiHomeState()
 }
 
 sealed class UiDetailsState {
     object Loading: UiDetailsState()
-    //data class Success( val movieDetail: MovieDetail?): UiDetailsState()
     data class Success( val movieDetail: MovieDetail?, val imagesResponse: ImagesResponse?): UiDetailsState()
     data class Error(val e: Throwable?): UiDetailsState()
 
