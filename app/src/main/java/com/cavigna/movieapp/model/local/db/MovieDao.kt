@@ -2,6 +2,7 @@ package com.cavigna.movieapp.model.local.db
 
 import androidx.paging.PagingSource
 import androidx.room.*
+import com.cavigna.movieapp.model.models.model.images.ImagesResponse
 import com.cavigna.movieapp.model.models.model.movie.Movie
 import com.cavigna.movieapp.model.models.model.movie.MovieDetail
 import kotlinx.coroutines.flow.Flow
@@ -48,4 +49,14 @@ interface MovieDao {
      @Query("SELECT * FROM movies_popular_table WHERE searched=1")
      fun selectMovieSearch(): Flow<List<Movie>>
 
+    /**
+     * IMAGES QUERY
+     *
+     */
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertImages(imagesResponse: ImagesResponse)
+
+    @Query("SELECT * FROM images_details_table WHERE id =:id")
+    suspend fun selectImages(id:Int):ImagesResponse
 }

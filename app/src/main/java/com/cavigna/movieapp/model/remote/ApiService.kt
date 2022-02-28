@@ -1,15 +1,14 @@
 package com.cavigna.movieapp.model.remote
 
 import com.cavigna.movieapp.BuildConfig
-import com.cavigna.movieapp.model.models.model.movie.MovieResponse
-import com.cavigna.movieapp.model.models.model.movie.MovieDetail
 import com.cavigna.movieapp.model.models.model.credits.CreditResponse
 import com.cavigna.movieapp.model.models.model.images.ImagesResponse
+import com.cavigna.movieapp.model.models.model.movie.MovieDetail
+import com.cavigna.movieapp.model.models.model.movie.MovieResponse
 import com.cavigna.movieapp.model.models.model.rating.GuestSession
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import com.cavigna.movieapp.model.models.model.rating.RespuestaPostRating
+import com.google.gson.JsonObject
+import retrofit2.http.*
 
 
 //https://image.tmdb.org/t/p/w500/EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg
@@ -83,8 +82,19 @@ interface ApiService {
         @Query(value= "api_key") apiKey:String = APIKEY,
     ): GuestSession
 
+    //https://api.themoviedb.org/3/movie/107/rating?api_key=...&guest_session_id=...
+    @POST("movie/{id}/rating")
+    suspend fun postRating(
+        @Path("id")id:Int,
+        @Body rating : JsonObject,
+        @Query("guest_session_id") guestSessionId: String,
+        @Query(value= "api_key") apiKey:String = APIKEY,
 
+    ): RespuestaPostRating
 
-//    @POST("movie/{movie_id}/rating")
-//    suspend fun ()
 }
+
+
+
+
+

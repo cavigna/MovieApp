@@ -19,6 +19,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 inline fun <T> Flow<T>.launchAndCollectIn(
     owner: LifecycleOwner,
@@ -120,3 +124,20 @@ fun internetCheck(c: Context): Boolean {
 }
 
 fun  fillPathTMDB(string: String) = "https://image.tmdb.org/t/p/w500${string}"
+
+
+fun parseDate(fecha: String): String {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        val localDate =  LocalDate.parse(fecha, format);
+
+        //val formatter = DateTimeFormatter.ofPattern("d MMM  yyyy", Locale.forLanguageTag("es-CL"))
+
+        val formatter = DateTimeFormatter.ofPattern("d MMM yyyy")
+        localDate.format(formatter)
+
+    }else{
+        fecha
+    }
+}
+

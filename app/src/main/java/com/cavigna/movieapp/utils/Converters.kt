@@ -8,6 +8,9 @@ import com.cavigna.movieapp.model.models.model.details.Genre
 import com.cavigna.movieapp.model.models.model.details.ProductionCompany
 import com.cavigna.movieapp.model.models.model.details.ProductionCountry
 import com.cavigna.movieapp.model.models.model.details.SpokenLanguage
+import com.cavigna.movieapp.model.models.model.images.Backdrop
+import com.cavigna.movieapp.model.models.model.images.Logo
+import com.cavigna.movieapp.model.models.model.images.Poster
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
@@ -91,6 +94,51 @@ class Converters {
         val type=object : TypeToken<List<Genre>>(){}.type
         return Gson().fromJson(json,type)
     }
+
+
+    @TypeConverter
+    fun fromBackDrop(listOfBackdrops: List<Backdrop>):String{
+        val type = object : TypeToken<List<Backdrop>>(){}.type
+
+        return Gson().toJson(listOfBackdrops, type)?: "[]"
+    }
+
+    @TypeConverter
+    fun toBackdrop(json:String):List<Backdrop>{
+        val type=object : TypeToken<List<Backdrop>>(){}.type
+        return Gson().fromJson(json,type)
+    }
+
+    @TypeConverter
+    fun fromLogo(listOfLogos: List<Logo>):String{
+        val type = object : TypeToken<List<Logo>>(){}.type
+        return Gson().toJson(listOfLogos, type)?: "[]"
+    }
+
+    @TypeConverter
+    fun toLogo(json:String):List<Logo>{
+        val type=object : TypeToken<List<Logo>>(){}.type
+        return Gson().fromJson(json,type)
+    }
+
+    @TypeConverter
+    fun fromPoster(listOfPosters: List<Poster>):String{
+        val type = object : TypeToken<List<Poster>>(){}.type
+
+        return Gson().toJson(listOfPosters, type)?: "[]"
+    }
+
+    @TypeConverter
+    fun toPoster(json:String):List<Poster>{
+        val type=object : TypeToken<List<Poster>>(){}.type
+        return Gson().fromJson(json,type)
+    }
+
+
+
+
+
+
 
     @TypeConverter
     fun fromCast(listGenres: List<Cast>):String{
