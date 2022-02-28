@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cavigna.movieapp.databinding.FragmentFavoriteBinding
 import com.cavigna.movieapp.ui.adapters.DetailsListAdapter
+import com.cavigna.movieapp.ui.adapters.MoPageAdapter
 import com.cavigna.movieapp.ui.states.UiFavoriteState
 import com.cavigna.movieapp.utils.launchAndRepeatWithViewLifecycle
 import com.cavigna.movieapp.viewmodel.MainViewModel
@@ -18,11 +19,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class FavoriteFragment() : Fragment() {
+class FavoriteFragment() : Fragment(), MoPageAdapter.ExtraerId {
     private val viewModel by activityViewModels<MainViewModel>()
     private lateinit var binding: FragmentFavoriteBinding
     private lateinit var recycler: RecyclerView
-    private val adapter by lazy { DetailsListAdapter() }
+    private val adapter by lazy { DetailsListAdapter(this) }
 
 
     override fun onCreateView(
@@ -43,7 +44,7 @@ class FavoriteFragment() : Fragment() {
                 when(it){
                     is UiFavoriteState.Success -> {
                         adapter.submitList(it.listOfFavorites)
-                        Log.v("pruebas", it.listOfFavorites.toString())
+
                     }
                 }
             }
@@ -53,5 +54,9 @@ class FavoriteFragment() : Fragment() {
 
 
         return binding.root
+    }
+
+    override fun alHacerClick(id: Int) {
+        viewModel.selectMovieDetails(id)
     }
 }

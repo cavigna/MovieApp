@@ -19,6 +19,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 inline fun <T> Flow<T>.launchAndCollectIn(
     owner: LifecycleOwner,
@@ -57,7 +61,7 @@ inline fun <ResultType, RequestType> networkBoundResource(
     val data = query().firstOrNull()
 
     if (data != null) {
-        Log.v("pruebas", "IN DB")
+        Log.v("EMITIDO DE", " DB")
         // data is not null -> update loading status
         emit(Resource.Loading(data))
     }else{
@@ -70,7 +74,7 @@ inline fun <ResultType, RequestType> networkBoundResource(
 
         }
 
-        Log.v("pruebas", "BUSCADO EN LA API")
+        Log.v("EMITIDO DE", "API")
     }
 
     // load updated data from database (must not return null anymore)
@@ -80,11 +84,11 @@ inline fun <ResultType, RequestType> networkBoundResource(
     emit(Resource.Success(updatedData))
 
 }.onStart {
-    Log.v("pruebas", "Loading")
+    Log.v("networkBoundResource", "Loading")
     emit(Resource.Loading(null))
 
 }.catch { exception ->
-    Log.v("pruebas", "erro")
+    Log.v("networkBoundResource", "erro")
     emit(Resource.Error(exception, null))
 
 
@@ -94,9 +98,6 @@ fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }
 }
 
-//fun Activity.hideKeyboard() {
-//    hideKeyboard(currentFocus ?: View(this))
-//}
 
 fun Context.hideKeyboard(view: View) {
     val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -120,3 +121,20 @@ fun internetCheck(c: Context): Boolean {
 }
 
 fun  fillPathTMDB(string: String) = "https://image.tmdb.org/t/p/w500${string}"
+
+
+fun parseDate(fecha: String): String {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        val localDate =  LocalDate.parse(fecha, format);
+
+        //val formatter = DateTimeFormatter.ofPattern("d MMM  yyyy", Locale.forLanguageTag("es-CL"))
+
+        val formatter = DateTimeFormatter.ofPattern("d MMM yyyy")
+        localDate.format(formatter)
+
+    }else{
+        fecha
+    }
+}
+

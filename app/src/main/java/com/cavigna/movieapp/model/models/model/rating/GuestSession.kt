@@ -10,3 +10,10 @@ data class GuestSession(
     @SerializedName("expires_at")
     var expiresAt: String = ""
 )
+
+data class RespuestaPostRating(
+
+    val success: String,
+    val status_code: Int,
+    val status_message:String
+)

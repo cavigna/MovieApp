@@ -15,12 +15,12 @@ data class MovieDetail(
     @PrimaryKey
     var id: Int = 0,
     @SerializedName("adult")
-    var adult: Boolean = false,
+    var adult: Boolean? = false,
 
     @ColumnInfo(defaultValue = "0")
     var favorite: Boolean = false,
     @SerializedName("backdrop_path")
-    var backdropPath: String = "",
+    var backdropPath: String? = "",
 
     @Ignore
     @SerializedName("belongs_to_collection")
@@ -44,7 +44,7 @@ data class MovieDetail(
     @SerializedName("popularity")
     var popularity: Double = 0.0,
     @SerializedName("poster_path")
-    var posterPath: String = "",
+    var posterPath: String? = "",
 
     @SerializedName("production_companies")
     var productionCompanies: List<ProductionCompany> = listOf(),

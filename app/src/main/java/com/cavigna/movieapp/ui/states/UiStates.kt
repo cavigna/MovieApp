@@ -1,6 +1,7 @@
 package com.cavigna.movieapp.ui.states
 
 import androidx.paging.PagingData
+import com.cavigna.movieapp.model.models.model.images.ImagesResponse
 import com.cavigna.movieapp.model.models.model.movie.Movie
 import com.cavigna.movieapp.model.models.model.movie.MovieResponse
 import com.cavigna.movieapp.model.models.model.movie.MovieDetail
@@ -12,12 +13,11 @@ sealed class UiHomeState {
     data class Local(val movies: List<Movie>) : UiHomeState()
     object Loading : UiHomeState()
     data class Error(val message: String, val moviesPopuular: List<Movie>)
-    data class Prueba(val pagingData: PagingData<Movie>) : UiHomeState()
 }
 
 sealed class UiDetailsState {
     object Loading: UiDetailsState()
-    data class Success( val movieDetail: MovieDetail?): UiDetailsState()
+    data class Success( val movieDetail: MovieDetail?, val imagesResponse: ImagesResponse?): UiDetailsState()
     data class Error(val e: Throwable?): UiDetailsState()
 
 }

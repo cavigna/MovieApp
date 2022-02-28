@@ -27,7 +27,6 @@ class MoListAdapter(
             tvTituloRow.text = movie.title
             tvVoteAvergae.text = movie.voteAverage.toString()
             imageView.load("https://image.tmdb.org/t/p/original${movie.posterPath}")
-            //ratingBar.numStars = movie.voteAverage.toFloat().toInt()
             ratingBar.rating = movie.voteAverage.toFloat()
 
             holder.binding. card.setOnClickListener {
@@ -36,6 +35,7 @@ class MoListAdapter(
                     "home" -> Navigation.findNavController(holder.itemView).navigate(R.id.action_homeFragment_to_detailsFragment)
                     "search" -> Navigation.findNavController(holder.itemView).navigate(R.id.action_searchFragment_to_detailsFragment)
                     "upcoming" -> Navigation.findNavController(holder.itemView).navigate(R.id.action_upcomingFragment_to_detailsFragment)
+                    "favorite" -> Navigation.findNavController(holder.itemView).navigate(R.id.action_favoriteFragment_to_detailsFragment)
                 }
 
 

@@ -20,9 +20,6 @@ class MoPageAdapter(val extraerId: ExtraerId) : PagingDataAdapter<Movie, MovieVi
                 tvTituloRow.text = movie.title
                 tvVoteAvergae.text = movie.voteAverage.toString()
                 imageView.load("https://image.tmdb.org/t/p/original${movie.posterPath}")
-                //ratingBar.numStars = 10
-                //ratingBar.numStars = movie.voteAverage.toFloat().toInt()
-                //ratingBar.rating = movie.voteAverage.toFloat()
                 ratingBar.rating = ((movie.voteAverage*5/10).toFloat())
 
                 holder.binding. card.setOnClickListener {
@@ -47,7 +44,6 @@ class MoPageAdapter(val extraerId: ExtraerId) : PagingDataAdapter<Movie, MovieVi
 
 
 class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-   // val binding: ItemRowBinding = ItemRowBinding.bind(itemView)
    val binding: ItemRowVerticalBinding = ItemRowVerticalBinding.bind(itemView)
 
     companion object {

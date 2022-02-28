@@ -3,14 +3,18 @@ package com.cavigna.movieapp.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.cavigna.movieapp.R
 import com.cavigna.movieapp.databinding.ItemRowVerticalBinding
 import com.cavigna.movieapp.model.models.model.movie.MovieDetail
 
-class DetailsListAdapter : ListAdapter<MovieDetail, DetailViewHolder>(ComparadorDetail()) {
+class DetailsListAdapter(
+    private val extraerId: MoPageAdapter.ExtraerId
+) : ListAdapter<MovieDetail, DetailViewHolder>(ComparadorDetail()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailViewHolder {
         return DetailViewHolder.create(parent)
     }
@@ -21,8 +25,12 @@ class DetailsListAdapter : ListAdapter<MovieDetail, DetailViewHolder>(Comparador
             tvTituloRow.text = movie.title
             tvVoteAvergae.text = movie.voteAverage.toString()
             imageView.load("https://image.tmdb.org/t/p/original${movie.posterPath}")
-            //ratingBar.numStars = movie.voteAverage.toFloat().toInt()
             ratingBar.rating = movie.voteAverage.toFloat()
+
+            card.setOnClickListener {
+                Navigation.findNavController(holder.itemView).navigate(R.id.action_favoriteFragment_to_detailsFragment)
+                extraerId.alHacerClick(movie.id)
+            }
         }
     }
 
